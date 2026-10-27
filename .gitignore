@@ -1,16 +1,25 @@
-# 敏感信息（绝对不能提交）
+# ====== 敏感信息（绝对不能提交）======
 .env
 
-# 虚拟环境
+# ====== 虚拟环境 ======
 .venv/
 venv/
 
-# IDE 配置
+# ====== IDE 配置 ======
 .idea/
+.vscode/
 
-# Python 缓存
+# ====== Python 缓存 ======
 __pycache__/
 *.pyc
 
-# 日志
+# ====== 日志 ======
 *.log
+
+# ====== 微信小程序 / 前端专属防呆 ======
+node_modules/
+miniprogram_npm/
+package-lock.json
+yarn.lock
+project.private.config.json
+.DS_Store
