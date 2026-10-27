@@ -1,0 +1,16 @@
+# 敏感信息（绝对不能提交）
+.env
+
+# 虚拟环境
+.venv/
+venv/
+
+# IDE 配置
+.idea/
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 日志
+*.log

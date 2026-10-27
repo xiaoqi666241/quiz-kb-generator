@@ -1,0 +1,14 @@
+{
+  "knowledge_blocks": [
+    {
+      "id": "kp_001",
+      "name": "劳动合同订立",
+      "summary": "劳动合同订立的主体、形式与时间要求",
+      "source_excerpt": "建立劳动关系，应当订立书面劳动合同。已建立劳动关系，未同时订立书面劳动合同的，应当自用工之日起一个月内订立书面劳动合同。",
+      "scope": "包含书面形式、一个月内订立；不包含试用期、解除条件"
+    }
+  ],
+  "question_types": ["single", "blank"],
+  "count": 15,
+  "existing_stems": []
+}
