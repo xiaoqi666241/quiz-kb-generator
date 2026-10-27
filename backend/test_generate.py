@@ -5,7 +5,7 @@ import requests
 
 BASE = "http://127.0.0.1:8000"
 
-with open("request_example.json", "r", encoding="utf-8") as f:
+with open("examples/request_example.json", "r", encoding="utf-8") as f:
     base_payload = json.load(f)
 
 
