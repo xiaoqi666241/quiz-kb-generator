@@ -1,0 +1,11 @@
+page {
+  background: #f5f6fa;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.placeholder-page {
+  padding: 60rpx 40rpx;
+  font-size: 32rpx;
+  color: #666;
+}
