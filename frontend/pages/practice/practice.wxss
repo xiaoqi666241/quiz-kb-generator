@@ -110,3 +110,19 @@
   font-size: 32rpx;
   margin-top: 24rpx;
 }
+/* ===== PC 宽屏适配：压缩纵向尺寸，一屏放下 ===== */
+@media (min-width: 800px) {
+  .page { padding: 16px; }
+  .progress { font-size: 13px; margin-bottom: 8px; }
+  .stem { font-size: 18px; margin-bottom: 14px; }
+  .option { padding: 10px 14px; margin-bottom: 8px; font-size: 15px; }
+  .blank-area { margin-bottom: 14px; }
+  .blank-input { padding: 10px 14px; font-size: 15px; }
+  .submit-btn { font-size: 16px; margin-top: 8px; }
+  .feedback { padding: 14px; margin-top: 14px; }
+  .feedback-title { font-size: 17px; margin-bottom: 8px; }
+  .answer-line { font-size: 15px; margin-bottom: 6px; }
+  .explanation { font-size: 14px; margin-bottom: 6px; }
+  .source { font-size: 12px; padding: 8px; }
+  .next-btn { font-size: 16px; margin-top: 12px; }
+}

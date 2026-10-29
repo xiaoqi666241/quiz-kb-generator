@@ -5,7 +5,8 @@
     "pages/practice/practice",
     "pages/result/result",
     "pages/wrong/wrong",
-    "pages/stats/stats"
+    "pages/stats/stats",
+    "pages/extract/extract"
   ],
   "window": {
     "navigationBarTitleText": "知识块刷题",

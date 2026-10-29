@@ -1,1 +1,52 @@
-<view class="placeholder-page">统计页</view>`
+<view class="page">
+  <!-- 没有练习记录时的空提示 -->
+  <view wx:if="{{!hasData}}" class="empty">
+    <text>还没有练习记录，去练一组吧</text>
+  </view>
+
+  <!-- 有数据时 -->
+  <block wx:else>
+    <!-- 总览卡片 -->
+    <view class="card overview">
+      <view class="ov-item">
+        <text class="ov-num">{{overview.count}}</text>
+        <text class="ov-label">练习次数</text>
+      </view>
+      <view class="ov-item">
+        <text class="ov-num">{{overview.total}}</text>
+        <text class="ov-label">总题数</text>
+      </view>
+      <view class="ov-item">
+        <text class="ov-num">{{overview.correct}}</text>
+        <text class="ov-label">答对</text>
+      </view>
+      <view class="ov-item">
+        <text class="ov-num">{{overview.accuracy}}%</text>
+        <text class="ov-label">总正确率</text>
+      </view>
+    </view>
+
+    <!-- 知识点掌握度 -->
+    <view class="section-title">知识点掌握度</view>
+    <view class="card">
+      <view wx:for="{{pointStats}}" wx:key="id" class="point-row">
+        <view class="point-head">
+          <text class="point-name">{{item.name}}</text>
+          <text class="point-acc">{{item.correct}}/{{item.total}} · {{item.accuracy}}%</text>
+        </view>
+        <view class="bar-wrap">
+          <view class="bar" style="width: {{item.accuracy}}%"></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 最近练习 -->
+    <view class="section-title">最近练习</view>
+    <view class="card">
+      <view wx:for="{{records}}" wx:key="recordId" class="record-row">
+        <text class="record-time">{{item.createdAtText}}</text>
+        <text class="record-acc">{{item.correctCount}}/{{item.totalCount}} · {{item.accuracy}}%</text>
+      </view>
+    </view>
+  </block>
+</view>

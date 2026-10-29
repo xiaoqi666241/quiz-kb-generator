@@ -13,9 +13,10 @@ Page({
     blankInput: "",    // 填空：用户输入的文字
     answered: false,   // 是否已提交答案
     isCorrect: false,  // 判题结果
-    answers: [],       // 本轮每题作答：{questionId, userAnswer, correct}
+    answers: [],       // 本轮每题作答：{questionId, userAnswer, correct, knowledgePointId}
     correctCount: 0,   // 答对数
-    retryMode: false   // 是否为错题重练模式
+    retryMode: false,  // 是否为错题重练模式
+    optionStates: []   // 提交后每个选项的状态：'' / 'is-right' / 'is-wrong'
   },
 
   onLoad(options) {
@@ -25,7 +26,8 @@ Page({
         questions: getApp().globalData.retryQuestions,
         index: 0,
         current: getApp().globalData.retryQuestions[0],
-        retryMode: true
+        retryMode: true,
+        optionStates: []
       })
       return
     }
@@ -52,7 +54,8 @@ Page({
         this.setData({
           questions: res.questions,
           index: 0,
-          current: res.questions[0]
+          current: res.questions[0],
+          optionStates: []
         })
       } else {
         // 后端不可用：切前端内置题库并提示
@@ -60,7 +63,8 @@ Page({
         this.setData({
           questions: PRESET_QUESTIONS,
           index: 0,
-          current: PRESET_QUESTIONS[0]
+          current: PRESET_QUESTIONS[0],
+          optionStates: []
         })
       }
     })
@@ -94,6 +98,14 @@ Page({
 
     const result = judge(current, userAnswer)
 
+    // 提交后给每个选项标色：正确答案绿、选错的红
+    const optionStates = current.options.map(opt => {
+      const letter = opt[0]
+      if (letter === current.answer) return "is-right"
+      if (letter === selected && !result.correct) return "is-wrong"
+      return ""
+    })
+
     // 答错才写入错题集，答对不用记
     if (!result.correct) {
       addWrong(current, "preset_001")
@@ -108,13 +120,15 @@ Page({
     const answerItem = {
       questionId: current.id,
       userAnswer: userAnswer,
-      correct: result.correct
+      correct: result.correct,
+      knowledgePointId: current.knowledge_point_id || "unknown"
     }
     this.setData({
       answered: true,
       isCorrect: result.correct,
       answers: this.data.answers.concat(answerItem),
-      correctCount: this.data.correctCount + (result.correct ? 1 : 0)
+      correctCount: this.data.correctCount + (result.correct ? 1 : 0),
+      optionStates: optionStates
     })
   },
 
@@ -133,7 +147,8 @@ Page({
       selected: "",
       blankInput: "",
       answered: false,
-      isCorrect: false
+      isCorrect: false,
+      optionStates: []
     })
   },
 

@@ -27,3 +27,20 @@
   margin-top: 8rpx;
 }
 
+/* ===== 错题本 / 掌握度 按钮 ===== */
+.wrong-entry {
+  display: block;
+  width: 100%;
+  margin-bottom: 20rpx;
+  font-size: 32rpx;       /* 用 rpx，跟随屏幕缩放 */
+  padding: 20rpx 0;
+  background: #ffffff;
+  color: #2b6de8;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 16rpx;
+  text-align: center;
+  line-height: 1.4;
+}
+.wrong-entry::after {
+  border: none;           /* 去掉微信按钮自带的边框 */
+}

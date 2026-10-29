@@ -48,3 +48,20 @@
   font-size: 32rpx;
   margin-top: 24rpx;
 }
+/* ===== PC 宽屏适配：按钮不换行 + 压缩纵向尺寸 ===== */
+@media (min-width: 800px) {
+  .page { padding: 16px; }
+  .section-title { font-size: 18px; margin: 10px 4px; }
+  .block-card { padding: 12px; margin-bottom: 10px; }
+  .block-name { font-size: 17px; }
+  .block-summary { font-size: 15px; margin-top: 6px; }
+  .block-excerpt { font-size: 14px; margin-top: 6px; padding: 8px; }
+  .block-scope { font-size: 13px; margin-top: 6px; }
+  .start-btn {
+    font-size: 16px;
+    padding: 8px 0;
+    margin-top: 12px;
+    white-space: nowrap;   /* ← 关键：强制"开始练习"四个字一行 */
+    line-height: 1.2;
+  }
+}

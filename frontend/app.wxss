@@ -9,3 +9,11 @@ page {
   font-size: 32rpx;
   color: #666;
 }
+
+/* ===== PC 宽屏适配（答辩用电脑展示时内容居中、限宽） ===== */
+@media (min-width: 800px) {
+  .page {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}
