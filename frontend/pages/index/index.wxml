@@ -1,0 +1,15 @@
+<view class="page">
+  <view class="section-title">选择演示资料</view>
+
+  <view class="material-card"
+        wx:for="{{materials}}"
+        wx:key="materialId"
+        data-id="{{item.materialId}}"
+        bindtap="onSelectMaterial">
+    <view class="material-name">{{item.title}}</view>
+    <view class="material-desc">共 {{item.knowledgeBlocks.length}} 个知识块</view>
+  </view>
+
+  <view class="section-title">其他</view>
+  <button class="wrong-entry" bindtap="goWrong">错题本</button>
+</view>

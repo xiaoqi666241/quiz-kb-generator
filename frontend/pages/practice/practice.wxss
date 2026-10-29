@@ -1,0 +1,112 @@
+.page {
+  padding: 32rpx;
+}
+
+.progress {
+  font-size: 26rpx;
+  color: #888888;
+  text-align: right;
+  margin-bottom: 16rpx;
+}
+
+.stem {
+  font-size: 34rpx;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-bottom: 32rpx;
+}
+
+.option {
+  background: #ffffff;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 14rpx;
+  padding: 24rpx 28rpx;
+  margin-bottom: 18rpx;
+  font-size: 30rpx;
+}
+
+.option.selected {
+  border-color: #1f6feb;
+  background: #eff6ff;
+  color: #1f6feb;
+}
+
+.blank-area {
+  margin-bottom: 32rpx;
+}
+
+.blank-input {
+  background: #ffffff;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 14rpx;
+  padding: 24rpx 28rpx;
+  font-size: 30rpx;
+}
+
+.submit-btn {
+  background: #1f6feb;
+  color: #ffffff;
+  border-radius: 14rpx;
+  font-size: 32rpx;
+  margin-top: 16rpx;
+}
+
+.feedback {
+  border-radius: 16rpx;
+  padding: 28rpx;
+  margin-top: 32rpx;
+}
+
+.feedback.correct {
+  background: #f0fdf4;
+  border: 2rpx solid #86efac;
+}
+
+.feedback.wrong {
+  background: #fef2f2;
+  border: 2rpx solid #fca5a5;
+}
+
+.feedback-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+}
+
+.feedback.correct .feedback-title {
+  color: #16a34a;
+}
+
+.feedback.wrong .feedback-title {
+  color: #dc2626;
+}
+
+.answer-line {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.explanation {
+  font-size: 28rpx;
+  color: #444444;
+  line-height: 1.6;
+  margin-bottom: 12rpx;
+}
+
+.source {
+  font-size: 24rpx;
+  color: #888888;
+  background: #f5f6fa;
+  border-radius: 8rpx;
+  padding: 16rpx;
+  line-height: 1.5;
+}
+
+.next-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border-radius: 14rpx;
+  font-size: 32rpx;
+  margin-top: 24rpx;
+}

@@ -1,0 +1,29 @@
+.page {
+  padding: 24rpx;
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  margin: 20rpx 8rpx;
+}
+
+.material-card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  border: 2rpx solid #e5e7eb;
+}
+
+.material-name {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.material-desc {
+  font-size: 26rpx;
+  color: #888888;
+  margin-top: 8rpx;
+}
+

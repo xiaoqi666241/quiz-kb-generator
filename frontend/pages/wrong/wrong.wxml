@@ -1,0 +1,12 @@
+<view class="page">
+  <view class="section-title">错题本（{{wrongList.length}}）</view>
+
+  <view class="wrong-card" wx:for="{{wrongList}}" wx:key="questionId">
+    <view class="wrong-stem">{{item.question.stem}}</view>
+    <view class="wrong-meta">答错 {{item.wrongCount}} 次 · {{item.question.type === 'single' ? '单选' : '填空'}}</view>
+    <view class="wrong-answer">正确答案：{{item.question.answer}}</view>
+    <button class="retry-btn" data-id="{{item.questionId}}" bindtap="onRetry">重练此题</button>
+  </view>
+
+  <view class="empty" wx:if="{{wrongList.length === 0}}">暂无错题，去练习吧</view>
+</view>

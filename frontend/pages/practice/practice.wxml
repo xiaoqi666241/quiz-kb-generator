@@ -1,0 +1,40 @@
+<view class="page">
+
+  <!-- 进度：第 X / N 题 -->
+  <view class="progress">第 {{index + 1}} / {{questions.length}} 题</view>
+
+  <!-- 题干 -->
+  <view class="stem">{{current.stem}}</view>
+
+  <!-- 单选：四个选项 -->
+  <view class="options" wx:if="{{current.type === 'single'}}">
+    <view class="option {{selected === item[0] ? 'selected' : ''}}"
+          wx:for="{{current.options}}"
+          wx:key="*this"
+          data-option="{{item[0]}}"
+          bindtap="onSelectOption">
+      {{item}}
+    </view>
+  </view>
+
+  <!-- 填空：输入框 -->
+  <view class="blank-area" wx:else>
+    <input class="blank-input"
+           value="{{blankInput}}"
+           bindinput="onBlankInput"
+           placeholder="请输入答案" />
+  </view>
+
+  <!-- 未提交时显示提交按钮 -->
+  <button class="submit-btn" wx:if="{{!answered}}" bindtap="onSubmit">提交答案</button>
+
+  <!-- 已提交：显示对错反馈 + 正确答案 + 解析 -->
+  <view class="feedback {{isCorrect ? 'correct' : 'wrong'}}" wx:if="{{answered}}">
+    <view class="feedback-title">{{isCorrect ? '回答正确' : '回答错误'}}</view>
+    <view class="answer-line">正确答案：{{current.answer}}</view>
+    <view class="explanation">解析：{{current.explanation}}</view>
+    <view class="source">原文依据：{{current.source_excerpt}}</view>
+    <button class="next-btn" bindtap="onNext">{{index + 1 >= questions.length ? '完成练习' : '下一题'}}</button>
+  </view>
+
+</view>

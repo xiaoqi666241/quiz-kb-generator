@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/blocks/blocks",
+    "pages/practice/practice",
+    "pages/result/result",
+    "pages/wrong/wrong",
+    "pages/stats/stats"
+  ],
+  "window": {
+    "navigationBarTitleText": "知识块刷题",
+    "navigationBarBackgroundColor": "#1f6feb",
+    "navigationBarTextStyle": "white",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,12 @@
+<view class="page">
+  <view class="section-title">{{title}} · 知识块</view>
+
+  <view class="block-card" wx:for="{{blocks}}" wx:key="id">
+    <view class="block-name">{{item.name}}</view>
+    <view class="block-summary">{{item.summary}}</view>
+    <view class="block-excerpt">{{item.source_excerpt}}</view>
+    <view class="block-scope" wx:if="{{item.scope}}">{{item.scope}}</view>
+   
+ </view>
+ <button class="start-btn" bindtap="onStartPractice">开始练习</button>
+</view>
