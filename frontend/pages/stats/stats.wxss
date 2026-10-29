@@ -77,3 +77,19 @@
 }
 .record-time { color: #666; }
 .record-acc { color: #2b6de8; }
+.point-name-wrap {
+  display: flex;
+  align-items: center;
+}
+.point-weak {
+  background: #f5222d;
+  color: #ffffff;
+  font-size: 20rpx;
+  line-height: 1;
+  padding: 6rpx 12rpx;
+  border-radius: 8rpx;
+  margin-left: 12rpx;
+}
+.bar.bar-weak {
+  background: #f5222d;
+}

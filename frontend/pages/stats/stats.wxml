@@ -31,11 +31,14 @@
     <view class="card">
       <view wx:for="{{pointStats}}" wx:key="id" class="point-row">
         <view class="point-head">
-          <text class="point-name">{{item.name}}</text>
+          <view class="point-name-wrap">
+            <text class="point-name">{{item.name}}</text>
+            <text wx:if="{{item.weak}}" class="point-weak">薄弱</text>
+          </view>
           <text class="point-acc">{{item.correct}}/{{item.total}} · {{item.accuracy}}%</text>
         </view>
         <view class="bar-wrap">
-          <view class="bar" style="width: {{item.accuracy}}%"></view>
+          <view class="bar {{item.weak ? 'bar-weak' : ''}}" style="width: {{item.accuracy}}%"></view>
         </view>
       </view>
     </view>

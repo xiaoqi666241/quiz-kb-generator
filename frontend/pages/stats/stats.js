@@ -36,13 +36,18 @@ Page({
       pointMap[key].total += 1
       if (a.correct) pointMap[key].correct += 1
     }))
-    const pointStats = Object.keys(pointMap).map(key => ({
-      id: key,
-      name: pointNameMap[key] || key,
-      total: pointMap[key].total,
-      correct: pointMap[key].correct,
-      accuracy: Math.round(pointMap[key].correct / pointMap[key].total * 100)
-    })).sort((a, b) => a.accuracy - b.accuracy)   // 掌握度从低到高排，弱的排前面
+    const pointStats = Object.keys(pointMap).map(key => {
+      const accuracy = Math.round(pointMap[key].correct / pointMap[key].total * 100)
+      return {
+        id: key,
+        name: pointNameMap[key] || key,
+        total: pointMap[key].total,
+        correct: pointMap[key].correct,
+        accuracy,
+        weak: accuracy < 60          // 低于 60% 标记为薄弱
+      }
+    }).sort((a, b) => a.accuracy - b.accuracy)   // 掌握度从低到高排，弱的排前面
+
 
     // —— 3. 最近练习记录（倒序取前 5 条，算好正确率和时间文字） ——
     const recent = records.slice().reverse().slice(0, 5).map(r => ({
