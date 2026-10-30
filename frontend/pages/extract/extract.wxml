@@ -1,0 +1,24 @@
+<view class="page">
+  <view class="tip">粘贴 500~1000 字文本，提取知识块（不进入出题流程）</view>
+  <textarea class="input-area"
+            value="{{text}}"
+            bindinput="onInput"
+            placeholder="在这里粘贴资料文本..."></textarea>
+  <button class="extract-btn" bindtap="onExtract" disabled="{{extracting}}">
+    {{extracting ? '提取中...' : '提取知识块'}}
+  </button>
+
+  <!-- 错误提示 -->
+  <view class="error-box" wx:if="{{error}}">{{error}}</view>
+
+  <!-- 提取结果 -->
+  <view wx:if="{{hasResult}}" class="result-section">
+    <view class="section-title">提取到 {{blocks.length}} 个知识块</view>
+    <view class="block-card" wx:for="{{blocks}}" wx:key="id">
+      <view class="block-name">{{item.name}}</view>
+      <view class="block-summary" wx:if="{{item.summary}}">{{item.summary}}</view>
+      <view class="block-excerpt" wx:if="{{item.source_excerpt}}">{{item.source_excerpt}}</view>
+      <view class="block-scope" wx:if="{{item.scope}}">{{item.scope}}</view>
+    </view>
+  </view>
+</view>

@@ -23,5 +23,19 @@ Page({
     wx.navigateTo({
       url: "/pages/wrong/wrong"
     })
+  },
+
+  // 跳转掌握度统计页
+  goStats() {
+    wx.navigateTo({
+      url: "/pages/stats/stats"
+    })
+  },
+  // 跳转粘贴资料提取页
+  goExtract() {
+    wx.navigateTo({
+      url: "/pages/extract/extract"
+    })
   }
+
 })

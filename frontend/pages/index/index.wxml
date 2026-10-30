@@ -12,4 +12,7 @@
 
   <view class="section-title">其他</view>
   <button class="wrong-entry" bindtap="goWrong">错题本</button>
+  <button class="wrong-entry" bindtap="goStats">掌握度</button>
+  <button class="wrong-entry" bindtap="goExtract">粘贴资料提取</button>
+
 </view>
