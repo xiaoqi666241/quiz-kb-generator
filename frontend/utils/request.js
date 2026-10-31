@@ -2,7 +2,7 @@
 // 后端接口封装：POST /generate 生成题目 + POST /extract 提取知识块，含双层兜底
 // 接口契约见 E:\小程序设计校\API.md（v1.1，封维护，随 /docs 同步更新）
 const BASE_URL = "http://127.0.0.1:8000"
-const TIMEOUT = 30000 // 后端约定：wx.request 30 秒超时
+const TIMEOUT = 90000 // 后端约定：wx.request 90 秒超时（真实 LLM 生成 15~20 题实测约 34 秒，30 秒会误走兜底）
 
 // 生成题目
 // payload: { knowledge_blocks: [...], question_types: ["single","blank"], count: 15, existing_stems: [] }
