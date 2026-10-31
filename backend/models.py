@@ -13,7 +13,7 @@ class KnowledgeBlock(BaseModel):
 class GenerateRequest(BaseModel):
     knowledge_blocks: List[KnowledgeBlock] = Field(..., min_length=1, max_length=20)
     question_types: List[Literal["single", "blank"]]
-    count: int = Field(..., ge=15, le=20)
+    count: int = Field(..., ge=5, le=20)
     existing_stems: Optional[List[str]] = Field(default_factory=list)
 
 
