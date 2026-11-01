@@ -22,6 +22,17 @@
   line-height: 1.5;
 }
 
+.wrong-options {
+  margin-top: 12rpx;
+}
+
+.wrong-option {
+  font-size: 26rpx;
+  color: #333333;
+  line-height: 1.6;
+  padding: 4rpx 0;
+}
+
 .wrong-meta {
   font-size: 24rpx;
   color: #888888;
