@@ -3,6 +3,10 @@
 
   <view class="wrong-card" wx:for="{{wrongList}}" wx:key="questionId">
     <view class="wrong-stem">{{item.question.stem}}</view>
+    <!-- 单选：展示选项 -->
+    <view class="wrong-options" wx:if="{{item.question.type === 'single'}}">
+      <view class="wrong-option" wx:for="{{item.question.options}}" wx:for-item="opt" wx:key="*this">{{opt}}</view>
+    </view>
     <view class="wrong-meta">答错 {{item.wrongCount}} 次 · {{item.question.type === 'single' ? '单选' : '填空'}}</view>
     <view class="wrong-answer">正确答案：{{item.question.answer}}</view>
     <button class="retry-btn" data-id="{{item.questionId}}" bindtap="onRetry">重练此题</button>
