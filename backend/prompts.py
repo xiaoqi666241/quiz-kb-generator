@@ -68,6 +68,8 @@ def build_generate_prompt(knowledge_blocks, question_types, count, existing_stem
 
 知识块：
 {kb_text}
+
+请直接输出纯 JSON 数组，绝对不要输出 Markdown 代码块标记（如 ```json），不要输出任何开场白或结尾语。
 """
     return SYSTEM_PROMPT, user_prompt
 
