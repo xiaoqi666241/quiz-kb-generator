@@ -16,7 +16,9 @@ Page({
     answers: [],       // 本轮每题作答：{questionId, userAnswer, correct, knowledgePointId}
     correctCount: 0,   // 答对数
     retryMode: false,  // 是否为错题重练模式
-    optionStates: []   // 提交后每个选项的状态：'' / 'is-right' / 'is-wrong'
+    optionStates: [],   // 提交后每个选项的状态：'' / 'is-right' / 'is-wrong'
+    loading: false,     // 是否显示自定义 AI 出题 loading
+    loadingText: ""     // 动态阶段字幕
   },
 
   onLoad(options) {
@@ -32,20 +34,55 @@ Page({
       return
     }
 
+    // 流式演示：直接用流式页生成好的 3 题答题（复用判题闭环）
+    if (options.stream && getApp().globalData.streamQuestions) {
+      const qs = getApp().globalData.streamQuestions
+      this.setData({
+        questions: qs,
+        index: 0,
+        current: qs[0],
+        optionStates: []
+      })
+      return
+    }
+
     // 正常练习：先请求后端，失败/异常自动走前端内置题库（双层兜底）
     this.loadFromBackend()
   },
 
-  // 从后端拿题（第 4 天联调后这里会带上资料的知识块）
+  // 从后端拿题：携带用户选中的知识块；若异常路径未选中，默认第一套资料，避免后端 422
   loadFromBackend() {
-    wx.showLoading({ title: "AI 出题中..." })
+    // 自定义动态 loading：分阶段字幕降低等待焦虑（0-5s 解析 → 5-15s 思考 → 15-30s 生成 → 30s+ 校验去重）
+    const stages = [
+      { max: 5,   text: "🔍 正在解析预置知识块..." },
+      { max: 15,  text: "🧠 大模型正在深度思考，提炼考点..." },
+      { max: 30,  text: "📝 正在生成干扰项与精准解析..." },
+      { max: Number.MAX_SAFE_INTEGER, text: "🛡️ 正在执行格式校验与原文去重，马上就好..." }
+    ]
+    const t0 = Date.now()
+    const updateText = () => {
+      const sec = (Date.now() - t0) / 1000
+      const stage = stages.find(s => sec < s.max) || stages[stages.length - 1]
+      if (this.data.loadingText !== stage.text) this.setData({ loadingText: stage.text })
+    }
+    this.setData({ loading: true, loadingText: stages[0].text })
+    const timer = setInterval(updateText, 1000)
+
+    const done = () => {
+      clearInterval(timer)
+      this.setData({ loading: false })
+    }
+
+    const { MATERIALS } = require("../../data/materials")
+    const selected = getApp().globalData.selectedBlocks
+    const blocks = selected && selected.length ? selected : MATERIALS[0].knowledgeBlocks
     generateQuestions({
-      knowledge_blocks: [],
+      knowledge_blocks: blocks,
       question_types: ["single", "blank"],
       count: 15,
       existing_stems: []
     }).then((res) => {
-      wx.hideLoading()
+      done()
       if (res.ok) {
         // 后端返回题；若 fallback 为 true，提示已切后端预置题库
         if (res.needToast) {

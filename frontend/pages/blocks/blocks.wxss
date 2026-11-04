@@ -48,6 +48,13 @@
   font-size: 32rpx;
   margin-top: 24rpx;
 }
+.stream-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border-radius: 14rpx;
+  font-size: 32rpx;
+  margin-top: 16rpx;
+}
 /* ===== PC 宽屏适配：按钮不换行 + 压缩纵向尺寸 ===== */
 @media (min-width: 800px) {
   .page { padding: 16px; }

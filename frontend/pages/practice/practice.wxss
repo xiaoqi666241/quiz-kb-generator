@@ -110,6 +110,49 @@
   font-size: 32rpx;
   margin-top: 24rpx;
 }
+
+/* ===== AI 出题中：自定义动态 loading ===== */
+.loading-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 44rpx 52rpx;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loading-spinner {
+  width: 64rpx;
+  height: 64rpx;
+  border: 6rpx solid #e5e7eb;
+  border-top-color: #1f6feb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: 24rpx;
+  font-size: 28rpx;
+  color: #1f2937;
+}
 /* ===== PC 宽屏适配：压缩纵向尺寸，一屏放下 ===== */
 @media (min-width: 800px) {
   .page { padding: 16px; }
