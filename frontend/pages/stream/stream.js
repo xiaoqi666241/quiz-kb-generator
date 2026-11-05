@@ -6,7 +6,7 @@
 // 异常兜底：收到 [ERROR] / 断网 / 无题返回 → 自动切本地题库（PRESET_QUESTIONS 前 3 题），保证演示不中断
 const { PRESET_QUESTIONS } = require("../../data/preset")
 
-const FAKE_STREAM = true // true=联调假数据流(count=99)；答辩演示前改为 false 走真实 LLM 流(count=3)
+const FAKE_STREAM = false // true=联调假数据流(count=99)；false=真实 LLM 流(count=3，答辩演示)
 
 Page({
   data: {
