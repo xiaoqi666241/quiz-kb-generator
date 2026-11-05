@@ -17,6 +17,8 @@ Page({
     typingDone: false,  // 当前题是否打字完毕
     allDone: false,     // 3 题全部完成
     streamError: false, // 是否流式出错
+    connecting: false,  // 是否正在等待 LLM 出题（Loading 动画）
+    connectText: "",    // Loading 动态字幕
     tip: ""             // 顶部状态提示
   },
 
@@ -35,6 +37,7 @@ Page({
     const blocks = selected && selected.length ? selected : MATERIALS[0].knowledgeBlocks
     const count = FAKE_STREAM ? 99 : 3
     this.setData({ tip: "正在连接生成服务..." })
+    this._startConnectLoading()
 
     this.streamTask = wx.request({
       url: BASE_URL + "/generate_stream",
@@ -84,7 +87,10 @@ Page({
       }
       try {
         const q = JSON.parse(payload)
-        if (q && q.stem) this.questions.push(q)
+        if (q && q.stem) {
+          this.questions.push(q)
+          if (this.data.connecting) this._stopConnectLoading() // 收到第一题，LLM 已开始产出
+        }
       } catch (e) {
         // 半截 JSON 帧：忽略，等后续帧拼完整
       }
@@ -94,6 +100,7 @@ Page({
   // 流式异常兜底：清空半成品，无感切本地题库
   _fallbackLocal(reason) {
     this._stop()
+    this._stopConnectLoading()
     console.log("[stream] 流式失败，切本地题库:", reason)
     this.questions = PRESET_QUESTIONS.slice(0, 3)
     this.setData({ streamError: false })
@@ -101,9 +108,37 @@ Page({
     this._beginRender()
   },
 
+  // ========== Loading 动画（等待 LLM 出题） ==========
+  // 分阶段动态字幕：0-5s 连接 → 5-15s 思考 → 15-30s 生成 → 30s+ 校验
+  _startConnectLoading() {
+    const stages = [
+      { max: 5,   text: "🔍 正在连接生成服务，解析知识块..." },
+      { max: 15,  text: "🧠 大模型正在深度思考，提炼考点..." },
+      { max: 30,  text: "📝 正在生成干扰项与精准解析..." },
+      { max: Number.MAX_SAFE_INTEGER, text: "🛡️ 正在执行格式校验与原文去重，马上就好..." }
+    ]
+    const t0 = Date.now()
+    const update = () => {
+      const sec = (Date.now() - t0) / 1000
+      const stage = stages.find(s => sec < s.max) || stages[stages.length - 1]
+      if (this.data.connectText !== stage.text) this.setData({ connectText: stage.text })
+    }
+    this.setData({ connecting: true, connectText: stages[0].text })
+    this._connectTimer = setInterval(update, 1000)
+  },
+
+  _stopConnectLoading() {
+    if (this._connectTimer) {
+      clearInterval(this._connectTimer)
+      this._connectTimer = null
+    }
+    this.setData({ connecting: false })
+  },
+
   // 开始打字机渲染（题目已就绪）
   _beginRender() {
     this._stop()
+    this._stopConnectLoading()
     this.setData({
       qIndex: 0,
       allDone: false,
@@ -162,6 +197,7 @@ Page({
 
   onUnload() {
     this._stop()
+    this._stopConnectLoading()
     if (this.streamTask && this.streamTask.abort) {
       try { this.streamTask.abort() } catch (e) {}
     }

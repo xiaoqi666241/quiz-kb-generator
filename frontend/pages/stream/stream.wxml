@@ -7,8 +7,14 @@
     <view class="stream-tip done-tip" wx:if="{{allDone}}">已输出 {{total}} 题，演示完成</view>
   </view>
 
+  <!-- Loading 动画：等待 LLM 出题 -->
+  <view class="loading-card" wx:if="{{connecting}}">
+    <view class="spinner"></view>
+    <view class="loading-text">{{connectText}}</view>
+  </view>
+
   <!-- 打字机输出区 -->
-  <view class="typing-card" wx:if="{{!allDone && !streamError}}">
+  <view class="typing-card" wx:if="{{!connecting && !allDone && !streamError}}">
     <view class="q-stem">{{typingStem}}<text class="cursor" wx:if="{{!typingDone}}">▌</text></view>
     <view class="q-options">
       <view class="q-option" wx:for="{{typedOptions}}" wx:key="*this" wx:for-item="opt">{{opt}}</view>

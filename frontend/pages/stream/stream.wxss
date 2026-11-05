@@ -30,6 +30,35 @@
   min-height: 320rpx;
 }
 
+/* ===== Loading 动画：等待 LLM 出题 ===== */
+.loading-card {
+  background: #ffffff;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 20rpx;
+  padding: 60rpx 36rpx;
+  text-align: center;
+}
+
+.spinner {
+  width: 72rpx;
+  height: 72rpx;
+  margin: 0 auto 24rpx;
+  border: 6rpx solid #e5e7eb;
+  border-top-color: #1f6feb;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
 .q-stem {
   font-size: 34rpx;
   font-weight: 600;
