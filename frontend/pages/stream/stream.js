@@ -6,7 +6,7 @@
 // 异常兜底：收到 [ERROR] / 断网 / 无题返回 → 自动切本地题库（PRESET_QUESTIONS 前 3 题），保证演示不中断
 const { PRESET_QUESTIONS } = require("../../data/preset")
 
-const FAKE_STREAM = true // true=联调假数据流(count=99)；false=真实 LLM 流(count=3，答辩演示)
+const FAKE_STREAM = true // true=联调假数据流(count=98，封后端判断为98)；false=真实 LLM 流(count=3，答辩演示)
 
 Page({
   data: {
@@ -35,7 +35,7 @@ Page({
     const { MATERIALS } = require("../../data/materials")
     const selected = getApp().globalData.selectedBlocks
     const blocks = selected && selected.length ? selected : MATERIALS[0].knowledgeBlocks
-    const count = FAKE_STREAM ? 99 : 3
+    const count = FAKE_STREAM ? 98 : 3
     this.setData({ tip: "正在连接生成服务..." })
     this._startConnectLoading()
 
