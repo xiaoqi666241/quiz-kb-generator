@@ -2,6 +2,14 @@
   padding: 32rpx;
 }
 
+.file-link-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border-radius: 14rpx;
+  font-size: 30rpx;
+  margin-bottom: 16rpx;
+}
+
 .tip {
   font-size: 26rpx;
   color: #888888;

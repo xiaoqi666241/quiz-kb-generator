@@ -1,0 +1,104 @@
+.page {
+  padding: 32rpx;
+}
+
+.tip {
+  font-size: 26rpx;
+  color: #888888;
+  margin-bottom: 16rpx;
+}
+
+.pick-btn {
+  background: #1f6feb;
+  color: #ffffff;
+  border-radius: 14rpx;
+  font-size: 32rpx;
+}
+
+.file-name {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  color: #374151;
+  background: #f5f6fa;
+  border-radius: 8rpx;
+  padding: 14rpx;
+}
+
+.error-box {
+  margin-top: 24rpx;
+  background: #fef2f2;
+  border: 2rpx solid #fca5a5;
+  color: #dc2626;
+  border-radius: 14rpx;
+  padding: 20rpx;
+  font-size: 26rpx;
+}
+
+.result-section {
+  margin-top: 32rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+}
+
+.block-card {
+  background: #ffffff;
+  border-radius: 14rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  border: 2rpx solid #e5e7eb;
+}
+
+.block-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1f6feb;
+}
+
+.block-summary {
+  font-size: 28rpx;
+  margin-top: 8rpx;
+}
+
+.block-excerpt {
+  font-size: 26rpx;
+  color: #666666;
+  margin-top: 8rpx;
+  background: #f5f6fa;
+  border-radius: 8rpx;
+  padding: 14rpx;
+}
+
+.block-scope {
+  font-size: 24rpx;
+  color: #999999;
+  margin-top: 8rpx;
+}
+
+.go-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border-radius: 14rpx;
+  font-size: 32rpx;
+  margin-top: 8rpx;
+}
+
+/* ===== PC 宽屏适配 ===== */
+@media (min-width: 800px) {
+  .page { padding: 16px; }
+  .tip { font-size: 13px; margin-bottom: 8px; }
+  .pick-btn { font-size: 16px; }
+  .file-name { margin-top: 8px; font-size: 13px; padding: 8px; }
+  .error-box { margin-top: 12px; padding: 10px; font-size: 13px; }
+  .result-section { margin-top: 16px; }
+  .section-title { font-size: 15px; margin-bottom: 8px; }
+  .block-card { padding: 12px; margin-bottom: 10px; }
+  .block-name { font-size: 15px; }
+  .block-summary { font-size: 14px; margin-top: 4px; }
+  .block-excerpt { font-size: 13px; margin-top: 4px; padding: 8px; }
+  .block-scope { font-size: 12px; margin-top: 4px; }
+  .go-btn { font-size: 16px; margin-top: 4px; }
+}

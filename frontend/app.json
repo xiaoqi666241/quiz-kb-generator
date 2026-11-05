@@ -7,6 +7,7 @@
     "pages/wrong/wrong",
     "pages/stats/stats",
     "pages/extract/extract",
+    "pages/file_extract/file_extract",
     "pages/stream/stream"
   ],
   "window": {
