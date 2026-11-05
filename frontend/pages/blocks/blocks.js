@@ -18,10 +18,19 @@ Page({
     }
   },
 
-  // 跳转练习页（假数据阶段先不传资料ID，第4天接后端时再传）
+  // 跳转练习页：把选中的知识块传给练习页（供后端 LLM 出题）
   onStartPractice() {
+    getApp().globalData.selectedBlocks = this.data.blocks
     wx.navigateTo({
       url: "/pages/practice/practice"
+    })
+  },
+
+  // 跳转流式演示页（打字机效果，固定 3 题）
+  onStreamDemo() {
+    getApp().globalData.selectedBlocks = this.data.blocks
+    wx.navigateTo({
+      url: "/pages/stream/stream"
     })
   }
 })
