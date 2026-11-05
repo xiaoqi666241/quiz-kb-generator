@@ -9,4 +9,5 @@
    
  </view>
  <button class="start-btn" bindtap="onStartPractice">开始练习</button>
+ <button class="stream-btn" bindtap="onStreamDemo">⚡ 流式演示（打字机）</button>
 </view>
