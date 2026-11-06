@@ -54,5 +54,7 @@
   </block>
 
   <!-- 云快照入口（备份/恢复，独立按钮，不动本地存储逻辑） -->
-  <button class="cloud-entry-btn" bindtap="onGoCloud">☁️ 云快照（备份 / 恢复）</button>
+  <view class="cloud-entry-wrap">
+    <button class="cloud-entry-btn" bindtap="onGoCloud">☁️ 云快照（备份/恢复）</button>
+  </view>
 </view>

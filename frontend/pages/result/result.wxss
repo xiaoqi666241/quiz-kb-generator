@@ -36,14 +36,24 @@
 .home-btn {
   background: #1f6feb;
   color: #ffffff;
-  border-radius: 14rpx;
-  font-size: 32rpx;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  line-height: 1.2;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 24rpx;
-  line-height: 1.4;
+  padding: 8rpx 24rpx;
   white-space: nowrap;
   flex: none;
   align-self: stretch;
   margin-top: 40rpx;
+}
+
+/* ===== PC 宽屏适配（避免 rpx 放大导致按钮文字被裁切） ===== */
+@media (min-width: 800px) {
+  .page { padding: 16px; }
+  .result-box { padding: 30px 20px; margin-top: 60px; border-radius: 10px; }
+  .result-title { font-size: 16px; }
+  .score { font-size: 36px; margin: 12px 0; }
+  .rate { font-size: 15px; }
+  .home-btn { font-size: 14px; line-height: 1.2; padding: 6px 12px; margin-top: 20px; border-radius: 8px; }
 }

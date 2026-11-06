@@ -95,14 +95,29 @@
 }
 
 /* 云快照入口（独立按钮，与本地存储逻辑无关） */
-.cloud-entry-btn {
-  margin-top: 32rpx;
+.cloud-entry-wrap {
   width: 100%;
+  margin-top: 32rpx;
+}
+
+.cloud-entry-btn {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 8rpx 16rpx;
   background: #ffffff;
   color: #1f6feb;
   border: 2rpx solid #1f6feb;
-  border-radius: 14rpx;
-  font-size: 32rpx;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  line-height: 1.2;
   white-space: nowrap;
-  line-height: 1.4;
+  text-align: center;
+}
+
+/* ===== PC 宽屏适配（避免 rpx 放大导致按钮文字被裁切） ===== */
+@media (min-width: 800px) {
+  .cloud-entry-wrap { margin-top: 16px; }
+  .cloud-entry-btn { font-size: 14px; padding: 6px 12px; border-radius: 8px; line-height: 1.2; }
 }
