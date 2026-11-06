@@ -105,13 +105,11 @@
   margin-bottom: 24rpx;
 }
 
-go-btn {
+.go-btn {
   background: #16a34a;
   color: #ffffff;
   border-radius: 14rpx;
   font-size: 32rpx;
-  width: 100% !important;
-  min-width: 100% !important;
 }
 
 .error-card {
@@ -129,13 +127,11 @@ go-btn {
   margin-bottom: 24rpx;
 }
 
-retry-btn {
+.retry-btn {
   background: #1f6feb;
   color: #ffffff;
   border-radius: 14rpx;
   font-size: 32rpx;
-  width: 100% !important;
-  min-width: 100% !important;
 }
 
 /* ===== PC 宽屏适配 ===== */

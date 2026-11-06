@@ -28,9 +28,9 @@
 }
 
 /* ===== 错题本 / 掌握度 按钮 ===== */
-wrong-entry {
+.wrong-entry {
   display: block;
-  width: 100% !important;
+  width: 100%;
   margin-bottom: 20rpx;
   font-size: 32rpx;       /* 用 rpx，跟随屏幕缩放 */
   padding: 20rpx 0;

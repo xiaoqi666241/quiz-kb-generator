@@ -8,13 +8,11 @@
   margin-bottom: 16rpx;
 }
 
-pick-btn {
+.pick-btn {
   background: #1f6feb;
   color: #ffffff;
   border-radius: 14rpx;
   font-size: 32rpx;
-  width: 100% !important;
-  min-width: 100% !important;
 }
 
 .file-name {
@@ -80,24 +78,19 @@ pick-btn {
   margin-top: 8rpx;
 }
 
-go-btn {
+.go-btn {
   background: #16a34a;
   color: #ffffff;
   border-radius: 14rpx;
   font-size: 32rpx;
   margin-top: 8rpx;
-  width: 100% !important;
-  min-width: 100% !important;
 }
 
 /* ===== PC 宽屏适配 ===== */
 @media (min-width: 800px) {
   .page { padding: 16px; }
   .tip { font-size: 13px; margin-bottom: 8px; }
-  .pick-btn { font-size: 16px;
-  width: 100% !important;
-  min-width: 100% !important;
-}
+  .pick-btn { font-size: 16px; }
   .file-name { margin-top: 8px; font-size: 13px; padding: 8px; }
   .error-box { margin-top: 12px; padding: 10px; font-size: 13px; }
   .result-section { margin-top: 16px; }
@@ -107,8 +100,5 @@ go-btn {
   .block-summary { font-size: 14px; margin-top: 4px; }
   .block-excerpt { font-size: 13px; margin-top: 4px; padding: 8px; }
   .block-scope { font-size: 12px; margin-top: 4px; }
-  .go-btn { font-size: 16px; margin-top: 4px;
-  width: 100% !important;
-  min-width: 100% !important;
-}
+  .go-btn { font-size: 16px; margin-top: 4px; }
 }

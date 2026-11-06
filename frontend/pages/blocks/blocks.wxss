@@ -47,8 +47,7 @@
   border-radius: 14rpx;
   font-size: 32rpx;
   margin-top: 24rpx;
-  width: 100% !important;
-  min-width: 100%;
+  width: 100%;
   white-space: nowrap;
   line-height: 1.4;
 }
@@ -58,8 +57,7 @@
   border-radius: 14rpx;
   font-size: 32rpx;
   margin-top: 16rpx;
-  width: 100% !important;
-  min-width: 100%;
+  width: 100%;
   white-space: nowrap;
   line-height: 1.4;
 }

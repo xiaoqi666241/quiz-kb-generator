@@ -45,14 +45,12 @@
   margin-top: 8rpx;
 }
 
-retry-btn {
+.retry-btn {
   background: #1f6feb;
   color: #ffffff;
   border-radius: 12rpx;
   font-size: 28rpx;
   margin-top: 20rpx;
-  width: 100% !important;
-  min-width: 100% !important;
 }
 
 .empty {

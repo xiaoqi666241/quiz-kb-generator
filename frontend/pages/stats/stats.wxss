@@ -94,8 +94,7 @@
   background: #f5222d;
 }
 
-/* 云快照入口（独立按钮，与本地存储逻辑无关）
-   微信原生 button 自带固定宽度，必须用 !important 才能撑满整行 */
+/* 云快照入口（独立按钮，与本地存储逻辑无关） */
 .cloud-entry-wrap {
   width: 100%;
   margin-top: 36rpx;
@@ -104,7 +103,6 @@
 .page .cloud-entry-btn {
   display: block;
   width: 100% !important;
-  min-width: 100%;
   box-sizing: border-box;
   margin: 0;
   padding: 18rpx 24rpx;
@@ -118,14 +116,8 @@
   text-align: center;
 }
 
-/* ===== PC 宽屏适配 ===== */
+/* ===== PC 宽屏适配（避免 rpx 放大导致按钮文字被裁切） ===== */
 @media (min-width: 800px) {
   .cloud-entry-wrap { margin-top: 18px; }
-  .page .cloud-entry-btn {
-    font-size: 16px;
-    padding: 9px 12px;
-    border-radius: 10px;
-    line-height: 1.4;
-    width: 100% !important;
-  }
+  .page .cloud-entry-btn { font-size: 16px; padding: 9px 12px; border-radius: 10px; line-height: 1.4; width: 100% !important; }
 }
