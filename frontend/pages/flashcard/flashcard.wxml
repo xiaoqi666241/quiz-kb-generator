@@ -1,0 +1,37 @@
+<view class="page">
+  <view class="fc-header">
+    <view class="fc-title">🗂 闪卡复习</view>
+    <view class="fc-progress">第 {{current + 1}} / {{total}} 张 · {{flipped ? '背面（答案解析）' : '正面（题干）'}}</view>
+  </view>
+
+  <swiper class="fc-swiper" current="{{current}}" bindchange="onSwiperChange">
+    <swiper-item wx:for="{{cards}}" wx:key="id">
+      <!-- 当前卡片：未翻面显示题干，翻面后显示答案与解析 -->
+      <view class="fc-card {{flipped && index === current ? 'fc-card-back' : ''}}"
+            bindtap="onFlip">
+        <scroll-view class="fc-scroll" scroll-y>
+          <block wx:if="{{!(flipped && index === current)}}">
+            <view class="fc-badge">题干</view>
+            <view class="fc-stem">{{item.stem}}</view>
+            <view class="fc-options">
+              <view class="fc-option" wx:for="{{item.options}}" wx:for-item="opt" wx:key="*this">{{opt}}</view>
+            </view>
+            <view class="fc-hint">👆 点击卡片翻面看答案</view>
+          </block>
+          <block wx:else>
+            <view class="fc-badge fc-badge-answer">答案与解析</view>
+            <view class="fc-answer">正确答案：{{item.answer}}</view>
+            <view class="fc-explain">{{item.explanation}}</view>
+            <view class="fc-source" wx:if="{{item.source_excerpt}}">原文：{{item.source_excerpt}}</view>
+            <view class="fc-hint">👆 再点一次翻回题干</view>
+          </block>
+        </scroll-view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <view class="fc-tabs">
+    <button class="fc-tab" bindtap="onPrev" disabled="{{current <= 0}}">⬅ 上一张</button>
+    <button class="fc-tab" bindtap="onNext" disabled="{{current >= total - 1}}">下一张 ➡</button>
+  </view>
+</view>

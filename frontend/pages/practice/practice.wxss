@@ -2,6 +2,24 @@
   padding: 32rpx;
 }
 
+.timer-bar {
+  background: #fff7e6;
+  border: 2rpx solid #f5c26b;
+  color: #b45309;
+  border-radius: 12rpx;
+  padding: 14rpx 20rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+  text-align: center;
+}
+
+.timer-danger {
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+
 .progress {
   font-size: 26rpx;
   color: #888888;
@@ -156,6 +174,7 @@
 /* ===== PC 宽屏适配：压缩纵向尺寸，一屏放下 ===== */
 @media (min-width: 800px) {
   .page { padding: 16px; }
+  .timer-bar { font-size: 13px; padding: 8px 10px; margin-bottom: 8px; }
   .progress { font-size: 13px; margin-bottom: 8px; }
   .stem { font-size: 18px; margin-bottom: 14px; }
   .option { padding: 10px 14px; margin-bottom: 8px; font-size: 15px; }

@@ -1,5 +1,10 @@
 <view class="page">
 
+<!-- 限时模式：整卷倒计时（剩余不足 60 秒变红） -->
+<view class="timer-bar {{timeLeft <= 60 ? 'timer-danger' : ''}}" wx:if="{{timedMode}}">
+  ⏱ 限时模式 · 剩余 {{timeText}}
+</view>
+
 <!-- 进度：第 X / N 题 -->
 <view class="progress">第 {{index + 1}} / {{questions.length}} 题</view>
 

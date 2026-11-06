@@ -1,0 +1,19 @@
+<view class="page">
+  <view class="cloud-title">☁️ 云快照（备份 / 恢复）</view>
+  <view class="cloud-tip">把本机错题本、答题记录、统计数据备份到微信云开发；换设备或重装小程序后可一键恢复。恢复会覆盖本机数据（有二次确认）。</view>
+
+  <!-- 云开发未配置时的提示（11.10 死线：若最终不通则隐藏入口按钮） -->
+  <view class="cloud-warn" wx:if="{{!cloudReady}}">
+    ⚠️ 云开发环境未配置（需在 utils/cloudSync.js 填入环境 ID），当前云同步不可用
+  </view>
+
+  <button class="cloud-btn backup-btn" bindtap="onBackup" disabled="{{!cloudReady || backing}}">
+    {{backing ? '备份中...' : '⬆️ 备份到云端'}}
+  </button>
+
+  <button class="cloud-btn restore-btn" bindtap="onRestore" disabled="{{!cloudReady || restoring}}">
+    {{restoring ? '查询中...' : '⬇️ 从云端恢复'}}
+  </button>
+
+  <view class="cloud-last" wx:if="{{lastText}}">{{lastText}}</view>
+</view>

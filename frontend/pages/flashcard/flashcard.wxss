@@ -1,0 +1,149 @@
+.page {
+  padding: 32rpx;
+}
+
+.fc-header {
+  margin-bottom: 24rpx;
+}
+
+.fc-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.fc-progress {
+  font-size: 26rpx;
+  color: #6b7280;
+  margin-top: 10rpx;
+}
+
+/* 闪卡容器：固定高度，内容过长时卡片内滚动 */
+.fc-swiper {
+  height: 780rpx;
+}
+
+.fc-card {
+  height: 100%;
+  background: #ffffff;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 24rpx;
+  box-shadow: 0 6rpx 24rpx rgba(31, 41, 55, 0.08);
+  overflow: hidden;
+}
+
+.fc-card-back {
+  background: #f0f9ff;
+  border-color: #bae6fd;
+}
+
+.fc-scroll {
+  height: 100%;
+  padding: 36rpx;
+  box-sizing: border-box;
+}
+
+.fc-badge {
+  display: inline-block;
+  font-size: 24rpx;
+  color: #ffffff;
+  background: #1f6feb;
+  border-radius: 8rpx;
+  padding: 6rpx 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.fc-badge-answer {
+  background: #16a34a;
+}
+
+.fc-stem {
+  font-size: 34rpx;
+  font-weight: 600;
+  line-height: 1.7;
+  color: #111827;
+}
+
+.fc-options {
+  margin-top: 24rpx;
+}
+
+.fc-option {
+  font-size: 30rpx;
+  color: #374151;
+  background: #f5f6fa;
+  border-radius: 12rpx;
+  padding: 18rpx 24rpx;
+  margin-bottom: 14rpx;
+  line-height: 1.5;
+}
+
+.fc-answer {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #16a34a;
+  margin-bottom: 20rpx;
+}
+
+.fc-explain {
+  font-size: 30rpx;
+  color: #374151;
+  line-height: 1.7;
+  margin-bottom: 20rpx;
+}
+
+.fc-source {
+  font-size: 26rpx;
+  color: #6b7280;
+  background: #ffffff;
+  border-radius: 10rpx;
+  padding: 18rpx;
+  line-height: 1.6;
+}
+
+.fc-hint {
+  margin-top: 28rpx;
+  font-size: 24rpx;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.fc-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24rpx;
+}
+
+.fc-tab {
+  flex: 1;
+  font-size: 30rpx;
+  background: #ffffff;
+  color: #1f6feb;
+  border: 2rpx solid #1f6feb;
+  border-radius: 14rpx;
+  margin: 0 10rpx;
+  white-space: nowrap;
+}
+
+.fc-tab[disabled] {
+  color: #c0c4cc;
+  border-color: #e5e7eb;
+  background: #f5f6fa;
+}
+
+/* ===== PC 宽屏适配 ===== */
+@media (min-width: 800px) {
+  .page { padding: 16px; }
+  .fc-title { font-size: 20px; }
+  .fc-progress { font-size: 13px; margin-top: 6px; }
+  .fc-swiper { height: 420px; }
+  .fc-scroll { padding: 20px; }
+  .fc-badge { font-size: 12px; padding: 3px 8px; margin-bottom: 10px; }
+  .fc-stem { font-size: 18px; }
+  .fc-option { font-size: 15px; padding: 9px 12px; margin-bottom: 7px; }
+  .fc-answer { font-size: 18px; margin-bottom: 10px; }
+  .fc-explain { font-size: 15px; margin-bottom: 10px; }
+  .fc-source { font-size: 13px; padding: 9px; }
+  .fc-hint { font-size: 12px; margin-top: 14px; }
+  .fc-tab { font-size: 15px; }
+}

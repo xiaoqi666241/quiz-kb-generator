@@ -18,10 +18,16 @@ Page({
     retryMode: false,  // 是否为错题重练模式
     optionStates: [],   // 提交后每个选项的状态：'' / 'is-right' / 'is-wrong'
     loading: false,     // 是否显示自定义 AI 出题 loading
-    loadingText: ""     // 动态阶段字幕
+    loadingText: "",    // 动态阶段字幕
+    timedMode: false,   // 是否限时模式（纯前端倒计时强制交卷）
+    timeText: "",       // 倒计时显示 mm:ss
+    timeLeft: 0         // 剩余秒数
   },
 
   onLoad(options) {
+    // 限时模式：?timed=1（题目就绪后开始整卷倒计时，到时强制交卷）
+    this.timedMode = options.timed === "1"
+    this.setData({ timedMode: this.timedMode })
     // 错题重练：用错题本暂存的题，不请求后端
     if (options.retry && getApp().globalData.retryQuestions) {
       this.setData({
@@ -31,6 +37,7 @@ Page({
         retryMode: true,
         optionStates: []
       })
+      this._startCountdown()
       return
     }
 
@@ -43,6 +50,7 @@ Page({
         current: qs[0],
         optionStates: []
       })
+      this._startCountdown()
       return
     }
 
@@ -94,6 +102,7 @@ Page({
           current: res.questions[0],
           optionStates: []
         })
+        this._startCountdown()
       } else {
         // 后端不可用：切前端内置题库并提示
         wx.showToast({ title: "已切换预置题库", icon: "none" })
@@ -103,6 +112,7 @@ Page({
           current: PRESET_QUESTIONS[0],
           optionStates: []
         })
+        this._startCountdown()
       }
     })
   },
@@ -189,8 +199,46 @@ Page({
     })
   },
 
+  // 限时模式：整卷倒计时（180 秒），到 0 强制交卷
+  _startCountdown() {
+    if (!this.timedMode) return
+    this._clearCountdown()
+    let left = 180
+    const fmt = (s) => {
+      const m = Math.floor(s / 60)
+      const ss = s % 60
+      return (m < 10 ? "0" + m : m) + ":" + (ss < 10 ? "0" + ss : ss)
+    }
+    this.setData({ timeLeft: left, timeText: fmt(left) })
+    this._cdTimer = setInterval(() => {
+      left -= 1
+      this.setData({ timeLeft: left, timeText: fmt(left) })
+      if (left <= 0) {
+        this._clearCountdown()
+        wx.showModal({
+          title: "⏰ 时间到",
+          content: "限时练习已结束，自动交卷",
+          showCancel: false,
+          success: () => this.finishPractice()
+        })
+      }
+    }, 1000)
+  },
+
+  _clearCountdown() {
+    if (this._cdTimer) {
+      clearInterval(this._cdTimer)
+      this._cdTimer = null
+    }
+  },
+
+  onUnload() {
+    this._clearCountdown()
+  },
+
   // 本轮练习完成：写答题记录 + 跳结果页
   finishPractice() {
+    this._clearCountdown()
     const { questions, answers, correctCount } = this.data
     const totalCount = questions.length
 

@@ -32,5 +32,20 @@ Page({
     wx.navigateTo({
       url: "/pages/stream/stream"
     })
+  },
+
+  // 限时练习：整卷 3 分钟倒计时，到时强制交卷
+  onTimedPractice() {
+    getApp().globalData.selectedBlocks = this.data.blocks
+    wx.navigateTo({
+      url: "/pages/practice/practice?timed=1"
+    })
+  },
+
+  // 闪卡复习：正面题干，翻面看答案解析
+  onFlashcard() {
+    wx.navigateTo({
+      url: "/pages/flashcard/flashcard"
+    })
   }
 })
