@@ -26,8 +26,8 @@
   margin-bottom: 28rpx;
 }
 
-.cloud-btn {
-  width: 100%;
+cloud-btn {
+  width: 100% !important;
   border-radius: 14rpx;
   font-size: 32rpx;
   white-space: nowrap;
@@ -65,6 +65,9 @@
   .cloud-title { font-size: 20px; }
   .cloud-tip { font-size: 13px; margin: 8px 0 16px; }
   .cloud-warn { font-size: 13px; padding: 10px; margin-bottom: 14px; }
-  .cloud-btn { font-size: 16px; padding: 8px 0; margin-bottom: 10px; }
+  .cloud-btn { font-size: 16px; padding: 8px 0; margin-bottom: 10px;
+  width: 100% !important;
+  min-width: 100% !important;
+}
   .cloud-last { font-size: 12px; }
 }

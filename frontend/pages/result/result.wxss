@@ -33,27 +33,36 @@
   color: #444444;
 }
 
-.home-btn {
+/* 返回首页：撑满整行、一行文字（微信原生 button 自带固定宽度，需 !important 覆盖） */
+.page .home-btn {
   background: #1f6feb;
   color: #ffffff;
-  border-radius: 12rpx;
-  font-size: 26rpx;
-  line-height: 1.2;
-  width: 100%;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  line-height: 1.4;
+  width: 100% !important;
+  min-width: 100%;
   box-sizing: border-box;
-  padding: 8rpx 24rpx;
+  padding: 18rpx 24rpx;
   white-space: nowrap;
   flex: none;
   align-self: stretch;
-  margin-top: 40rpx;
+  margin: 48rpx 0 0 0;
 }
 
-/* ===== PC 宽屏适配（避免 rpx 放大导致按钮文字被裁切） ===== */
+/* ===== PC 宽屏适配 ===== */
 @media (min-width: 800px) {
   .page { padding: 16px; }
   .result-box { padding: 30px 20px; margin-top: 60px; border-radius: 10px; }
   .result-title { font-size: 16px; }
   .score { font-size: 36px; margin: 12px 0; }
   .rate { font-size: 15px; }
-  .home-btn { font-size: 14px; line-height: 1.2; padding: 6px 12px; margin-top: 20px; border-radius: 8px; }
+  .page .home-btn {
+    font-size: 16px;
+    line-height: 1.4;
+    padding: 9px 12px;
+    margin-top: 24px;
+    border-radius: 10px;
+    width: 100% !important;
+  }
 }
