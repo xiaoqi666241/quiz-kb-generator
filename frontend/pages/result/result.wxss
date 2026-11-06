@@ -33,19 +33,19 @@
   color: #444444;
 }
 
+/* 返回首页：字号放大、框加高，宽度只包住文字（不撑满整行） */
 .page .home-btn {
   background: #1f6feb;
   color: #ffffff;
-  border-radius: 16rpx;
-  font-size: 30rpx;
-  line-height: 1.4;
-  width: 100% !important;
+  border-radius: 20rpx;
+  font-size: 38rpx;
+  line-height: 1.5;
+  width: auto !important;
   box-sizing: border-box;
-  padding: 18rpx 24rpx;
+  padding: 22rpx 60rpx;
   white-space: nowrap;
-  flex: none;
-  align-self: stretch;
-  margin-top: 40rpx;
+  display: inline-block;
+  margin: 48rpx auto 0;
 }
 
 /* ===== PC 宽屏适配（避免 rpx 放大导致按钮文字被裁切） ===== */
@@ -55,5 +55,5 @@
   .result-title { font-size: 16px; }
   .score { font-size: 36px; margin: 12px 0; }
   .rate { font-size: 15px; }
-  .page .home-btn { font-size: 16px; line-height: 1.4; padding: 9px 12px; margin-top: 20px; border-radius: 10px; width: 100% !important; }
+  .page .home-btn { font-size: 19px; line-height: 1.5; padding: 11px 30px; margin-top: 24px; border-radius: 10px; width: auto !important; }
 }
