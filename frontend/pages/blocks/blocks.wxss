@@ -52,7 +52,7 @@
   line-height: 1.4;
 }
 .stream-btn {
-  background: #16a34a;
+  background: #1f6feb;
   color: #ffffff;
   border-radius: 14rpx;
   font-size: 32rpx;
