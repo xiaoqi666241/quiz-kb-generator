@@ -93,3 +93,16 @@
 .bar.bar-weak {
   background: #f5222d;
 }
+
+/* 云快照入口（独立按钮，与本地存储逻辑无关） */
+.cloud-entry-btn {
+  margin-top: 32rpx;
+  width: 100%;
+  background: #ffffff;
+  color: #1f6feb;
+  border: 2rpx solid #1f6feb;
+  border-radius: 14rpx;
+  font-size: 32rpx;
+  white-space: nowrap;
+  line-height: 1.4;
+}

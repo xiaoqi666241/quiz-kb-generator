@@ -1,13 +1,20 @@
+import io
 import json
 import os
 import re
+import time
 from pathlib import Path
+from typing import Literal
 
+import docx
+import pdfplumber
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
+from pydantic import BaseModel, Field
 
-from llm_client import call_llm_json
+from llm_client import call_llm_json, call_llm_stream
 from models import (
     GenerateRequest,
     GenerateResponse,
@@ -21,6 +28,17 @@ from prompts import build_generate_prompt, build_extract_prompt
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
+
+
+class GenerateStreamRequest(BaseModel):
+    """/generate_stream 专用请求体：count 放宽（联调假数据用 99、真实小批量用 3），其余字段与 GenerateRequest 一致。
+    GenerateRequest 的 5~20 约束保持不变，/generate 行为不受影响。"""
+
+    knowledge_blocks: list[KnowledgeBlock] = Field(default_factory=list)
+    question_types: list[Literal["single", "blank"]] = Field(default_factory=lambda: ["single", "blank"])
+    count: int = 15
+    existing_stems: list[str] = Field(default_factory=list)
+
 
 app = FastAPI(title="刷题软件知识块生成器 - 后端")
 
@@ -278,8 +296,8 @@ def extract(req: ExtractRequest):
         raw_blocks = data.get("knowledge_blocks", [])
         if not raw_blocks:
             raise ValueError("LLM 返回 knowledge_blocks 为空")
-        # 安全网：最多取 3 个知识块
-        return [KnowledgeBlock(**b) for b in raw_blocks[:3]]
+        # 安全网：最多取 5 个知识块
+        return [KnowledgeBlock(**b) for b in raw_blocks[:5]]
 
     # 第 1 次尝试
     try:
@@ -299,4 +317,111 @@ def extract(req: ExtractRequest):
         fallback=True,
         knowledge_blocks=[],
         error={"code": "EXTRACT_FAILED", "message": "提取失败"},
+    )
+
+
+@app.post("/extract_file", response_model=ExtractResponse)
+async def extract_file(file: UploadFile = File(...)):
+    filename = (file.filename or "").lower()
+    if not (filename.endswith(".pdf") or filename.endswith(".docx")):
+        raise HTTPException(
+            status_code=400,
+            detail={"code": "INVALID_FORMAT", "message": "仅支持 PDF 和 DOCX 格式"},
+        )
+
+    contents = await file.read()
+    if len(contents) > 5 * 1024 * 1024:
+        raise HTTPException(
+            status_code=400,
+            detail={"code": "FILE_TOO_LARGE", "message": "文件不能超过 5MB"},
+        )
+
+    text = ""
+    try:
+        if filename.endswith(".pdf"):
+            with pdfplumber.open(io.BytesIO(contents)) as pdf:
+                for i, page in enumerate(pdf.pages):
+                    if i >= 20:  # 最多解析前 20 页
+                        break
+                    page_text = page.extract_text()
+                    if page_text:
+                        text += page_text + "\n"
+        else:
+            doc = docx.Document(io.BytesIO(contents))
+            for para in doc.paragraphs:
+                text += para.text + "\n"
+                if len(text) > 30000:  # Word 最多提取前 30000 字
+                    text = text[:30000]
+                    break
+    except Exception as e:
+        raise HTTPException(
+            status_code=422,
+            detail={"code": "PARSE_ERROR", "message": f"文件解析失败: {e}"},
+        )
+
+    text = text.strip()
+    if len(text) < 50:
+        raise HTTPException(
+            status_code=422,
+            detail={"code": "NO_TEXT_FOUND", "message": "未检测到有效文本，请勿上传扫描件"},
+        )
+
+    try:
+        system_prompt, user_prompt = build_extract_prompt(text[:5000])
+        data = call_llm_json(system_prompt, user_prompt)
+        blocks = [KnowledgeBlock(**b) for b in data.get("knowledge_blocks", [])[:5]]
+        return ExtractResponse(fallback=False, knowledge_blocks=blocks)
+    except Exception as e:
+        print(f"=== 文件提取知识块失败 ===\n{e}")
+        return ExtractResponse(
+            fallback=True,
+            knowledge_blocks=[],
+            error={"code": "LLM_EXTRACT_FAILED", "message": "AI 解析繁忙，请稍后再试"},
+        )
+
+
+@app.post("/generate_stream")
+def generate_stream(req: GenerateStreamRequest):
+    """SSE 流式出题：count=99 走假数据（供前端联调）；否则走真实大模型，最多推 3 题。"""
+
+    def event_stream():
+        # 假数据分支：前端联调用，不调用大模型
+        if req.count == 99:
+            for i in range(3):
+                time.sleep(0.5)
+                yield f'data: {{"id":"q_00{i + 1}", "type":"single", "stem":"假数据流题{i + 1}", "explanation":"测试"}}\n\n'
+            yield "data: [DONE]\n\n"
+            return
+
+        # 真实大模型流式分支
+        try:
+            system_prompt, user_prompt = build_generate_prompt(
+                req.knowledge_blocks, req.question_types, req.count, req.existing_stems
+            )
+            buffer = ""
+            question_count = 0
+
+            for chunk in call_llm_stream(system_prompt, user_prompt):
+                buffer += chunk
+                # 题目结构扁平（无嵌套对象），用正则匹配含 "stem" 的完整 JSON 单块
+                while question_count < 3:
+                    m = re.search(r'\{[^{}]*"stem"[^{}]*\}', buffer)
+                    if not m:
+                        break
+                    json_str = m.group(0)
+                    buffer = buffer[: m.start()] + buffer[m.end():]  # 从缓冲区剔除已提取段
+                    question_count += 1
+                    yield f"data: {json_str}\n\n"
+                if question_count >= 3:
+                    break
+
+            yield "data: [DONE]\n\n"
+        except Exception as e:
+            print(f"=== generate_stream 调用失败 ===\n{e}")
+            yield "data: [ERROR]\n\n"
+
+    return StreamingResponse(
+        event_stream(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache"},
     )

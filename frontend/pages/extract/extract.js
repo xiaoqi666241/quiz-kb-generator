@@ -10,6 +10,13 @@ Page({
     error: ""          // 错误提示文案
   },
 
+  // 跳转文件解析页（PDF/Word）
+  onGoFileExtract() {
+    wx.navigateTo({
+      url: "/pages/file_extract/file_extract"
+    })
+  },
+
   // 输入框内容变化
   onInput(e) {
     this.setData({ text: e.detail.value })

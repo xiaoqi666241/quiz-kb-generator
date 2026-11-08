@@ -1,0 +1,36 @@
+<view class="page">
+
+  <!-- 顶部状态栏 -->
+  <view class="stream-header">
+    <view class="stream-title">⚡ 流式出题（打字机）</view>
+    <view class="stream-tip" wx:if="{{!allDone}}">{{tip}}</view>
+    <view class="stream-tip done-tip" wx:if="{{allDone}}">已输出 {{total}} 题，演示完成</view>
+  </view>
+
+  <!-- Loading 动画：等待 LLM 出题 -->
+  <view class="loading-card" wx:if="{{connecting}}">
+    <view class="spinner"></view>
+    <view class="loading-text">{{connectText}}</view>
+  </view>
+
+  <!-- 打字机输出区 -->
+  <view class="typing-card" wx:if="{{!connecting && !allDone && !streamError}}">
+    <view class="q-stem">{{typingStem}}<text class="cursor" wx:if="{{!typingDone}}">▌</text></view>
+    <view class="q-options">
+      <view class="q-option" wx:for="{{typedOptions}}" wx:key="*this" wx:for-item="opt">{{opt}}</view>
+    </view>
+  </view>
+
+  <!-- 流式出错兜底提示 -->
+  <view class="error-card" wx:if="{{streamError}}">
+    <view class="error-title">⚠️ 生成中断</view>
+    <button class="retry-btn" bindtap="startStream">重新生成</button>
+  </view>
+
+  <!-- 完成区：进入答题 -->
+  <view class="done-card" wx:if="{{allDone}}">
+    <view class="done-title">✅ 3 道题已生成（打字机演示完成）</view>
+    <button class="go-btn" bindtap="goPractice">开始答题</button>
+  </view>
+
+</view>

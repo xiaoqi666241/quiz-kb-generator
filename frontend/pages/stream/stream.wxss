@@ -1,0 +1,145 @@
+.page {
+  padding: 32rpx;
+}
+
+.stream-header {
+  margin-bottom: 28rpx;
+}
+
+.stream-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.stream-tip {
+  font-size: 26rpx;
+  color: #6b7280;
+  margin-top: 10rpx;
+}
+
+.done-tip {
+  color: #16a34a;
+}
+
+.typing-card {
+  background: #ffffff;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 20rpx;
+  padding: 36rpx;
+  min-height: 320rpx;
+}
+
+/* ===== Loading 动画：等待 LLM 出题 ===== */
+.loading-card {
+  background: #ffffff;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 20rpx;
+  padding: 60rpx 36rpx;
+  text-align: center;
+}
+
+.spinner {
+  width: 72rpx;
+  height: 72rpx;
+  margin: 0 auto 24rpx;
+  border: 6rpx solid #e5e7eb;
+  border-top-color: #1f6feb;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.q-stem {
+  font-size: 34rpx;
+  font-weight: 600;
+  line-height: 1.7;
+  color: #111827;
+}
+
+.cursor {
+  display: inline-block;
+  color: #1f6feb;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.q-options {
+  margin-top: 28rpx;
+}
+
+.q-option {
+  font-size: 30rpx;
+  color: #374151;
+  background: #f5f6fa;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  margin-bottom: 14rpx;
+  line-height: 1.5;
+}
+
+.done-card {
+  background: #f0fdf4;
+  border: 2rpx solid #86efac;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  text-align: center;
+}
+
+.done-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #16a34a;
+  margin-bottom: 24rpx;
+}
+
+.go-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border-radius: 14rpx;
+  font-size: 32rpx;
+}
+
+.error-card {
+  background: #fef2f2;
+  border: 2rpx solid #fca5a5;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  text-align: center;
+}
+
+.error-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #dc2626;
+  margin-bottom: 24rpx;
+}
+
+.retry-btn {
+  background: #1f6feb;
+  color: #ffffff;
+  border-radius: 14rpx;
+  font-size: 32rpx;
+}
+
+/* ===== PC 宽屏适配 ===== */
+@media (min-width: 800px) {
+  .page { padding: 16px; }
+  .stream-title { font-size: 20px; }
+  .stream-tip { font-size: 13px; }
+  .q-stem { font-size: 18px; }
+  .q-option { font-size: 15px; padding: 10px 14px; margin-bottom: 8px; }
+  .done-title { font-size: 17px; }
+}

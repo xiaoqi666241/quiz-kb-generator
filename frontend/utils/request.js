@@ -1,7 +1,7 @@
 // utils/request.js
 // 后端接口封装：POST /generate 生成题目 + POST /extract 提取知识块，含双层兜底
 // 接口契约见 E:\小程序设计校\API.md（v1.1，封维护，随 /docs 同步更新）
-const BASE_URL = "http://127.0.0.1:8000"
+const BASE_URL = "http://192.168.43.120:8000"
 const TIMEOUT = 90000 // 后端约定：wx.request 90 秒超时（真实 LLM 生成 15~20 题实测约 34 秒，30 秒会误走兜底）
 
 // 生成题目
@@ -74,4 +74,46 @@ function extractKnowledgeBlocks(text) {
   })
 }
 
-module.exports = { generateQuestions, extractKnowledgeBlocks, BASE_URL }
+// 上传文件解析知识块（P1：PDF/Word → 后端提取知识块）
+// 返回 Promise，resolve 统一结果对象：
+//   { ok: true, blocks }                              —— 拿到知识块数组
+//   { ok: false, reason: "llm_busy", message }        —— 200 fallback:true（AI 解析繁忙）
+//   { ok: false, reason: "http", message }            —— 400/422 业务错误（格式/大小/无文本等）
+//   { ok: false, reason: "network" }                  —— 网络失败
+function uploadFileForExtract(filePath) {
+  return new Promise((resolve) => {
+    wx.uploadFile({
+      url: BASE_URL + "/extract_file",
+      filePath: filePath,
+      name: "file",
+      timeout: TIMEOUT,
+      success(res) {
+        let data = null
+        try { data = JSON.parse(res.data) } catch (e) {}
+        // 200 且有知识块 → 展示
+        if (res.statusCode === 200 && data && Array.isArray(data.knowledge_blocks) && data.knowledge_blocks.length > 0) {
+          resolve({ ok: true, blocks: data.knowledge_blocks })
+          return
+        }
+        // 200 但 fallback:true（LLM 提取失败兜底）
+        if (res.statusCode === 200 && data && data.fallback === true) {
+          const msg = (data.error && data.error.message) || "AI 解析繁忙，请稍后再试"
+          resolve({ ok: false, reason: "llm_busy", message: msg })
+          return
+        }
+        // 400/422 业务错误：detail.code + detail.message
+        let msg = "文件解析失败，请重试"
+        if (data && data.detail) {
+          const d = data.detail
+          msg = typeof d === "string" ? d : (d.message || msg)
+        }
+        resolve({ ok: false, reason: "http", message: msg })
+      },
+      fail() {
+        resolve({ ok: false, reason: "network" })
+      }
+    })
+  })
+}
+
+module.exports = { generateQuestions, extractKnowledgeBlocks, uploadFileForExtract, BASE_URL }

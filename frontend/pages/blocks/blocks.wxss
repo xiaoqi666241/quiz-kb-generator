@@ -47,6 +47,19 @@
   border-radius: 14rpx;
   font-size: 32rpx;
   margin-top: 24rpx;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.stream-btn {
+  background: #1f6feb;
+  color: #ffffff;
+  border-radius: 14rpx;
+  font-size: 32rpx;
+  margin-top: 16rpx;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 1.4;
 }
 /* ===== PC 宽屏适配：按钮不换行 + 压缩纵向尺寸 ===== */
 @media (min-width: 800px) {
@@ -62,6 +75,13 @@
     padding: 8px 0;
     margin-top: 12px;
     white-space: nowrap;   /* ← 关键：强制"开始练习"四个字一行 */
+    line-height: 1.2;
+  }
+  .stream-btn {
+    font-size: 16px;
+    padding: 8px 0;
+    margin-top: 8px;
+    white-space: nowrap;
     line-height: 1.2;
   }
 }

@@ -1,0 +1,24 @@
+<view class="page">
+  <view class="tip">选择 PDF / Word 文件（≤5MB），自动解析并提取知识块（不进出题流程）</view>
+
+  <button class="pick-btn" bindtap="onPickFile" disabled="{{uploading}}">
+    {{uploading ? '上传解析中...' : '📎 选择文件（PDF/Word）'}}
+  </button>
+
+  <view class="file-name" wx:if="{{fileName && !uploading}}">已选：{{fileName}}</view>
+
+  <!-- 错误提示 -->
+  <view class="error-box" wx:if="{{error}}">{{error}}</view>
+
+  <!-- 提取结果 -->
+  <view wx:if="{{hasResult}}" class="result-section">
+    <view class="section-title">提取到 {{blocks.length}} 个知识块</view>
+    <view class="block-card" wx:for="{{blocks}}" wx:key="id">
+      <view class="block-name">{{item.name}}</view>
+      <view class="block-summary" wx:if="{{item.summary}}">{{item.summary}}</view>
+      <view class="block-excerpt" wx:if="{{item.source_excerpt}}">{{item.source_excerpt}}</view>
+      <view class="block-scope" wx:if="{{item.scope}}">{{item.scope}}</view>
+    </view>
+    <button class="go-btn" bindtap="goPractice" wx:if="{{blocks.length}}">去练习（用这些知识块出题）</button>
+  </view>
+</view>

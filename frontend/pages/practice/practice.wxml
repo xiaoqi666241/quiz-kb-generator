@@ -1,5 +1,10 @@
 <view class="page">
 
+<!-- 限时模式：整卷倒计时（剩余不足 60 秒变红） -->
+<view class="timer-bar {{timeLeft <= 60 ? 'timer-danger' : ''}}" wx:if="{{timedMode}}">
+  ⏱ 限时模式 · 剩余 {{timeText}}
+</view>
+
 <!-- 进度：第 X / N 题 -->
 <view class="progress">第 {{index + 1}} / {{questions.length}} 题</view>
 
@@ -32,9 +37,17 @@
 <view class="feedback {{isCorrect ? 'correct' : 'wrong'}}" wx:if="{{answered}}">
   <view class="feedback-title">{{isCorrect ? '回答正确' : '回答错误'}}</view>
   <view class="answer-line">正确答案：{{current.answer}}</view>
-  <view class="explanation">解析：{{current.explanation}}</view>
+  <view class="explanation">{{current.explanation}}</view>
   <view class="source">原文依据：{{current.source_excerpt}}</view>
   <button class="next-btn" bindtap="onNext">{{index + 1 >= questions.length ? '完成练习' : '下一题'}}</button>
+</view>
+
+<!-- AI 出题中：自定义动态 loading（字幕随阶段变化，降低等待焦虑） -->
+<view class="loading-mask" wx:if="{{loading}}">
+  <view class="loading-card">
+    <view class="loading-spinner"></view>
+    <view class="loading-text">{{loadingText}}</view>
+  </view>
 </view>
 
 </view>

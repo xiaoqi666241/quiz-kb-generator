@@ -21,6 +21,25 @@ def get_client() -> OpenAI:
     return _client
 
 
+def call_llm_stream(system_prompt: str, user_prompt: str):
+    """流式调用 LLM，逐块产出纯文本片段（只做文本传递，不解析 JSON）。"""
+    stream = get_client().chat.completions.create(
+        model=os.getenv("DEEPSEEK_MODEL_ID"),
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ],
+        temperature=0.3,
+        stream=True,
+    )
+    for chunk in stream:
+        if not chunk.choices:
+            continue
+        text = getattr(chunk.choices[0].delta, "content", None)
+        if text:
+            yield text
+
+
 def call_llm_json(system_prompt: str, user_prompt: str) -> dict:
     """调用 LLM 并解析 JSON；单次超时 60 秒，由调用方负责重试。"""
     resp = get_client().chat.completions.create(

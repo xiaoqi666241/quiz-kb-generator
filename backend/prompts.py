@@ -68,6 +68,8 @@ def build_generate_prompt(knowledge_blocks, question_types, count, existing_stem
 
 知识块：
 {kb_text}
+
+请直接输出纯 JSON 数组，绝对不要输出 Markdown 代码块标记（如 ```json），不要输出任何开场白或结尾语。
 """
     return SYSTEM_PROMPT, user_prompt
 
@@ -77,7 +79,7 @@ EXTRACT_SYSTEM_PROMPT = """你是知识块提取助手。你只能依据用户�
 
 
 def build_extract_prompt(text: str):
-    user_prompt = f"""请从以下文本中提取 1~3 个知识块，用于后续出题。
+    user_prompt = f"""请从以下文本中提取 3~5 个知识块，用于后续出题。
 
 要求：
 1. 每个知识块只包含 id、name、summary、source_excerpt、scope 五个字段。
@@ -87,6 +89,7 @@ def build_extract_prompt(text: str):
 5. source_excerpt：从文本中原样摘录的连续片段，不少于 15 个字，不得改写。
 6. scope：该知识块的考查范围，格式为“包含……；不包含……”。
 7. 输出 JSON，格式为 {{"knowledge_blocks": [ ... ]}}，不要输出其他文字。
+8. 不要输出 Markdown 代码块标记（如 ```json），不要输出任何开场白或结尾语。
 
 你必须严格按照以下 JSON 结构返回示例：
 {{

@@ -9,4 +9,7 @@
    
  </view>
  <button class="start-btn" bindtap="onStartPractice">开始练习</button>
+ <button class="start-btn" bindtap="onTimedPractice">⏱ 限时练习（3 分钟）</button>
+ <button class="start-btn" bindtap="onFlashcard">🗂 闪卡复习</button>
+ <button class="stream-btn" bindtap="onStreamDemo">⚡ 流式演示</button>
 </view>
