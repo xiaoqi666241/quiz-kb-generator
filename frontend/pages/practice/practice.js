@@ -181,6 +181,9 @@ Page({
 
   // 下一题
   onNext() {
+    if (this._nextLock) return   // 防连点：一次点击只前进一题
+    this._nextLock = true
+    setTimeout(() => { this._nextLock = false }, 300)
     const { questions, index } = this.data
     const nextIndex = index + 1
     if (nextIndex >= questions.length) {
@@ -238,6 +241,8 @@ Page({
 
   // 本轮练习完成：写答题记录 + 跳结果页
   finishPractice() {
+    if (this._finished) return   // 防重入：时间到与手动完成不会重复写记录
+    this._finished = true
     this._clearCountdown()
     const { questions, answers, correctCount } = this.data
     const totalCount = questions.length

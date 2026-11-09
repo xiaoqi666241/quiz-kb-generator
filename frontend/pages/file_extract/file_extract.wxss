@@ -13,6 +13,9 @@
   color: #ffffff;
   border-radius: 14rpx;
   font-size: 32rpx;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 1.4;
 }
 
 .file-name {
@@ -84,6 +87,10 @@
   border-radius: 14rpx;
   font-size: 32rpx;
   margin-top: 8rpx;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 1.4;
+
 }
 
 /* ===== PC 宽屏适配 ===== */
@@ -100,5 +107,6 @@
   .block-summary { font-size: 14px; margin-top: 4px; }
   .block-excerpt { font-size: 13px; margin-top: 4px; padding: 8px; }
   .block-scope { font-size: 12px; margin-top: 4px; }
-  .go-btn { font-size: 16px; margin-top: 4px; }
+  .pick-btn { font-size: 16px; padding: 8px 0; white-space: nowrap; line-height: 1.2; }
+  .go-btn { font-size: 16px; margin-top: 4px; padding: 8px 0; white-space: nowrap; line-height: 1.2; }
 }
