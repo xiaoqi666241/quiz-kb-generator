@@ -146,7 +146,8 @@ Page({
     const result = judge(current, userAnswer)
 
     // 提交后给每个选项标色：正确答案绿、选错的红
-    const optionStates = current.options.map(opt => {
+    // 填空题没有 options 字段，这里必须容错，否则 .map 会抛异常导致提交无反应
+    const optionStates = (current.options || []).map(opt => {
       const letter = opt[0]
       if (letter === current.answer) return "is-right"
       if (letter === selected && !result.correct) return "is-wrong"
