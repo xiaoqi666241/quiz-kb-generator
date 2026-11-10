@@ -110,6 +110,11 @@
   color: #ffffff;
   border-radius: 14rpx;
   font-size: 32rpx;
+  width: auto !important;
+  display: inline-block;
+  white-space: nowrap;
+  padding: 18rpx 48rpx;
+  line-height: 1.4;
 }
 
 .error-card {
@@ -142,4 +147,5 @@
   .q-stem { font-size: 18px; }
   .q-option { font-size: 15px; padding: 10px 14px; margin-bottom: 8px; }
   .done-title { font-size: 17px; }
+  .go-btn { font-size: 16px; padding: 9px 26px; width: auto !important; white-space: nowrap; line-height: 1.4; }
 }
