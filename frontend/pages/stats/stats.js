@@ -14,13 +14,6 @@ Page({
     records: []           // 最近 5 次练习
   },
 
-  // 云快照（备份/恢复）
-  onGoCloud() {
-    wx.navigateTo({
-      url: "/pages/cloud/cloud"
-    })
-  },
-
   onShow() {
     const records = getRecords()
     if (!records.length) {

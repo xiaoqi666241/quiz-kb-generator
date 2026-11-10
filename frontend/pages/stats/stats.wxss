@@ -93,33 +93,3 @@
 .bar.bar-weak {
   background: #f5222d;
 }
-
-/* 云快照入口（独立按钮，与本地存储逻辑无关）：字号放大、框加高，宽度只包住文字 */
-.cloud-entry-wrap {
-  width: 100%;
-  margin-top: 36rpx;
-  display: flex;
-  justify-content: center;
-}
-
-.page .cloud-entry-btn {
-  display: inline-block;
-  width: auto !important;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 22rpx 60rpx;
-  background: #ffffff;
-  color: #1f6feb;
-  border: 2rpx solid #1f6feb;
-  border-radius: 20rpx;
-  font-size: 38rpx;
-  line-height: 1.5;
-  white-space: nowrap;
-  text-align: center;
-}
-
-/* ===== PC 宽屏适配（避免 rpx 放大导致按钮文字被裁切） ===== */
-@media (min-width: 800px) {
-  .cloud-entry-wrap { margin-top: 18px; }
-  .page .cloud-entry-btn { font-size: 19px; padding: 11px 30px; border-radius: 10px; line-height: 1.5; width: auto !important; }
-}

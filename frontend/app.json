@@ -9,7 +9,6 @@
     "pages/extract/extract",
     "pages/file_extract/file_extract",
     "pages/flashcard/flashcard",
-    "pages/cloud/cloud",
     "pages/stream/stream"
   ],
   "window": {
