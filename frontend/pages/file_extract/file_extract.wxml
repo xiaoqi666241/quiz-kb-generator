@@ -2,7 +2,7 @@
   <view class="tip">选择 PDF / Word 文件（≤5MB），自动解析并提取知识块（不进出题流程）</view>
 
   <button class="pick-btn" bindtap="onPickFile" disabled="{{uploading}}">
-    {{uploading ? '上传解析中...' : '📎 选择文件（PDF/Word）'}}
+    {{uploading ? '上传解析中...' : '选择文件（PDF/Word）'}}
   </button>
 
   <view class="file-name" wx:if="{{fileName && !uploading}}">已选：{{fileName}}</view>

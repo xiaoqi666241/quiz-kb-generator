@@ -1,5 +1,5 @@
 <view class="page">
-  <button class="file-link-btn" bindtap="onGoFileExtract">📎 上传文件解析</button>
+  <button class="file-link-btn" bindtap="onGoFileExtract">上传文件解析</button>
   <view class="tip">支持 PDF / Word 文件（≤5MB），也可粘贴 100~1000 字文本提取知识块</view>
   <textarea class="input-area"
             maxlength="1000"
