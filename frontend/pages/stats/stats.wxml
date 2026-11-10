@@ -54,8 +54,7 @@
   </block>
 
   <!-- 云快照入口（备份/恢复，独立按钮，不动本地存储逻辑） -->
-  <!-- 11.10 云开发环境未通（CLOUD_ENV 为空），按排期死线规则隐藏；恢复时删掉下面的 wx:if="{{false}}" 即可 -->
-  <view class="cloud-entry-wrap" wx:if="{{false}}">
+  <view class="cloud-entry-wrap">
     <button class="cloud-entry-btn" bindtap="onGoCloud">☁️ 云快照（备份/恢复）</button>
   </view>
 </view>
