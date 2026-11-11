@@ -5,5 +5,5 @@
     <view class="rate">本次正确率 {{rate}}%</view>
   </view>
 
-  <button class="home-btn" bindtap="goHome">返回首页</button>
+  <button class="home-btn" bindtap="goHome">{{fromRetry ? '返回错题本' : '返回首页'}}</button>
 </view>

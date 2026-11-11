@@ -257,8 +257,10 @@ Page({
       createdAt: new Date().toISOString()
     })
 
+    // 错题重练结束 → 回错题本；普通练习 → 首页
+    const fromParam = this.data.retryMode ? "&from=retry" : ""
     wx.redirectTo({
-      url: "/pages/result/result?correct=" + correctCount + "&total=" + totalCount
+      url: "/pages/result/result?correct=" + correctCount + "&total=" + totalCount + fromParam
     })
   }
 })
